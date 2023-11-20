@@ -38,8 +38,9 @@ public class SignInService {
                 String token = Jwt
                         .issuer("https://zli.example.com/")
                         .upn(createdUser.getEmail())
-                        .groups(new HashSet<>(Arrays.asList("User", "Admin")))
-                        .expiresIn(Duration.ofHours(12))
+                        .groups(new HashSet<>(Arrays.asList(createdUser.getUserType().getTitle())))
+                        .expiresIn(Duration.ofHours(24))
+                        .claim("userID", createdUser.getId())
                         .sign();
 
                 return Response

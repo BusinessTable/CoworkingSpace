@@ -2,6 +2,8 @@ package ch.zli.m223.controller;
 
 import java.util.List;
 
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -22,7 +24,7 @@ import ch.zli.m223.service.UserService;
 
 @Path("/users")
 @Tag(name = "Users", description = "Handling of users")
-@RolesAllowed({ "ApplicationUser", "Admin" })
+@RolesAllowed({"Admin"})
 public class UserController {
     
     @Inject

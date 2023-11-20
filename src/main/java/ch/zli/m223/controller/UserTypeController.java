@@ -22,7 +22,7 @@ import ch.zli.m223.service.UserTypeService;
 
 @Path("/userTypes")
 @Tag(name = "UserType", description = "Handling of userTypes")
-@RolesAllowed({ "ApplicationUser", "Admin" })
+@RolesAllowed({"Admin" })
 public class UserTypeController {
     
     @Inject

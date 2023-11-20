@@ -22,49 +22,40 @@ import ch.zli.m223.service.SpaceService;
 
 @Path("/spaces")
 @Tag(name = "Spaces", description = "Handling of spaces")
-@RolesAllowed({ "ApplicationUser", "Admin" })
 public class SpaceController {
-    
- @Inject
+
+    @Inject
     SpaceService spaceService;
 
+    @RolesAllowed({ "ApplicationUser", "Admin" })
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-        summary = "Index all categories.", 
-        description = "Returns a list of all categories."
-    )
+    @Operation(summary = "Index all categories.", description = "Returns a list of all categories.")
     public List<Space> index() {
         return spaceService.findAll();
     }
 
+    @RolesAllowed({ "Admin" })
     @POST
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Operation(
-        summary = "Creates a new space.", 
-        description = "Creates a new space and returns the newly added space."
-    )
+    @Operation(summary = "Creates a new space.", description = "Creates a new space and returns the newly added space.")
     public Space create(Space space) {
-       return spaceService.createSpace(space);
+        return spaceService.createSpace(space);
     }
 
+    @RolesAllowed({ "Admin" })
     @Path("/{id}")
     @DELETE
-    @Operation(
-        summary = "Deletes an space.",
-        description = "Deletes an space by its id."
-    )
+    @Operation(summary = "Deletes an space.", description = "Deletes an space by its id.")
     public void delete(@PathParam("id") Long id) {
         spaceService.deleteSpace(id);
     }
 
+    @RolesAllowed({ "Admin" })
     @Path("/{id}")
     @PUT
-    @Operation(
-        summary = "Updates an space.",
-        description = "Updates an space by its id."
-    )
+    @Operation(summary = "Updates an space.", description = "Updates an space by its id.")
     public Space update(@PathParam("id") Long id, Space space) {
         return spaceService.updateSpace(id, space);
     }

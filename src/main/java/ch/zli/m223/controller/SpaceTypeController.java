@@ -22,7 +22,7 @@ import ch.zli.m223.service.SpaceTypeService;
 
 @Path("/spaceTypes")
 @Tag(name = "SpaceTypes", description = "Handling of spaceTypes")
-@RolesAllowed({ "ApplicationUser", "Admin" })
+@RolesAllowed({"Admin"})
 public class SpaceTypeController {
     
     @Inject
