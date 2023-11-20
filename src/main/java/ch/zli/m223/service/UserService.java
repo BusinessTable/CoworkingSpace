@@ -11,7 +11,8 @@ import javax.transaction.Transactional;
 import ch.zli.m223.model.ApplicationUser;
 
 @ApplicationScoped
-public class ApplicationUserService {
+public class UserService {
+    
     @Inject
     EntityManager entityManager;
 

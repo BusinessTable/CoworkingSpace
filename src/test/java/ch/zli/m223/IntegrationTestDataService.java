@@ -1,18 +1,11 @@
 package ch.zli.m223;
 
-import java.time.LocalDateTime;
-import java.util.Arrays;
-import java.util.HashSet;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-import ch.zli.m223.model.Category;
-import ch.zli.m223.model.Entry;
-import ch.zli.m223.model.Tag;
 import io.quarkus.arc.profile.IfBuildProfile;
 import io.quarkus.runtime.StartupEvent;
 
@@ -25,7 +18,7 @@ public class IntegrationTestDataService {
 
   @Transactional
   void generateTestData(@Observes StartupEvent event) {
-
+    /*
     // Categories
     var projectACategory = new Category();
     projectACategory.setTitle("Project A");
@@ -73,5 +66,6 @@ public class IntegrationTestDataService {
     thirdEntry.setCheckIn(LocalDateTime.now().minusHours(1));
     thirdEntry.setCheckOut(LocalDateTime.now());
     entityManager.persist(thirdEntry);
+     */
   }
 }

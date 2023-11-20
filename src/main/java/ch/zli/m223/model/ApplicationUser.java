@@ -1,64 +1,108 @@
 package ch.zli.m223.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 import org.eclipse.microprofile.openapi.annotations.media.Schema;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @NamedQueries({
-  @NamedQuery(name = "ApplicationUser.findByEmail", query = "SELECT u FROM ApplicationUser u WHERE u.email = :email")
+        @NamedQuery(name = "ApplicationUser.findByEmail", query = "SELECT u FROM ApplicationUser u WHERE u.email = :email")
 })
 public class ApplicationUser {
 
-  @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Schema(readOnly = true)
-  private Long id;
-  
-  @Column(nullable = false, unique = true)
-  private String email;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(readOnly = true)
+    private Long id;
 
-  @Column(nullable = false)
-  private String password;
+    @ManyToOne(optional = false)
+    @Fetch(FetchMode.JOIN)
+    private UserType userType;
 
-  @Column
-  private String nickname;
+    @OneToMany(mappedBy = "user")
+    @JsonIgnoreProperties("user")
+    @Fetch(FetchMode.JOIN)
+    private Set<Booking> booking;
 
-  public Long getId() {
-    return id;
-  }
+    @Column(nullable = false)
+    private String surname;
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    @Column(nullable = false)
+    private String firstname;
 
-  public String getEmail() {
-    return email;
-  }
+    @Column(nullable = false)
+    private String email;
 
-  public void setEmail(String email) {
-    this.email = email;
-  }
+    @Column(nullable = false)
+    private String password;
 
-  public String getPassword() {
-    return password;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setPassword(String password) {
-    this.password = password;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public String getNickname() {
-    return nickname;
-  }
+    public Set<Booking> getBookings() {
+        return booking;
+    }
 
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
-  }
+    public void setBookings(Set<Booking> booking) {
+        this.booking = booking;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getFirstname() {
+        return firstname;
+    }
+
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

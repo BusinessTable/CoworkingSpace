@@ -18,10 +18,10 @@ import io.smallrye.jwt.build.Jwt;
 public class SessionService {
 
   @Inject
-  ApplicationUserService applicationUserService;
+  UserService userService;
 
   public Response authenticate(Credential credential) {
-    Optional<ApplicationUser> principal = applicationUserService.findByEmail(credential.getEmail());
+    Optional<ApplicationUser> principal = userService.findByEmail(credential.getEmail());
 
     try {
       if (principal.isPresent() && principal.get().getPassword().equals(credential.getPassword())) {
