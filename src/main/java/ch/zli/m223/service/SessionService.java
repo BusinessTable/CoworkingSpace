@@ -28,7 +28,7 @@ public class SessionService {
         String token = Jwt
             .issuer("https://zli.example.com/")
             .upn(credential.getEmail())
-            .groups(new HashSet<>(Arrays.asList("User", "Admin")))
+            .groups(new HashSet<>(Arrays.asList(principal.get().getUserType().getTitle())))
             .expiresIn(Duration.ofHours(12))
             .sign();
         return Response
