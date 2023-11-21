@@ -22,6 +22,7 @@ public class SetUpService {
   @Inject
   EntityManager entityManager;
 
+  // these Types are needed on Startup in every environment
   @Transactional
   void setUpGeneralData(@Observes StartupEvent event) {
 
@@ -42,6 +43,7 @@ public class SetUpService {
     entityManager.persist(tableType2);
   }
 
+  // these are test data objects, only needed in dev environment
   @IfBuildProfile("dev")
   @Transactional
   void generateTestData(@Observes StartupEvent event) {
@@ -109,4 +111,3 @@ public class SetUpService {
   }
 
 }
-
