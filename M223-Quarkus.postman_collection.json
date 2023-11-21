@@ -1,0 +1,611 @@
+{
+	"info": {
+		"_postman_id": "f05ce54d-132e-444d-bd4a-b36c33fcc4f7",
+		"name": "M223-Quarkus",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25423221"
+	},
+	"item": [
+		{
+			"name": "Registrierung und Authentifizierung",
+			"item": [
+				{
+					"name": "Register new Admin SUCCSESS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3psaS5leGFtcGxlLmNvbS8iLCJ1cG4iOiJndW50aGVyLnBldGVyQG1haWwuY2giLCJncm91cHMiOlsiVXNlciJdLCJ1c2VySUQiOjMsImlhdCI6MTcwMDU2MDg2NSwiZXhwIjoxNzAwNjQ3MjY1LCJqdGkiOiIzMTRiODFiZC1hNjRiLTRmZmYtOTMyYy1hMzVkYTdkMTUzNjMifQ.HcUlRhPhubU6mp4fcDMsFAprPZc5M01IadxdZqk7ZKbuqrKYuART1ac3BHZ5qgQZ0wyRpltjQ_bi3GqLolKu08mzTDTWgcYMA3d24_PkaCoghoD1rniHoyymMqRZ7JU_WFIKgbxcJihui51iiN9_fW6zHqRQRkn_p1BUzxn-j02RtNXgJhOauXgsyOAyCpnB5muP0C6ZQQl8oucRPVJ9Hnl6hefyzUPO07RDpDKwt6RFCtzLJOGarh0SknTsTctVamuCNLJHOBfFzDXALGKfxzW8ezaiiZphIWQz2r-kGqHsOZOicgwvPAj3JfWiQ6u2UBJfyjZJYwtTVXk9WkWKEQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"surname\": \"admin\",\r\n    \"firstname\": \"ladmin\",\r\n    \"email\": \"ladmin.admin@coworkingspace.ch\",\r\n    \"password\": \"asdf\",\r\n    \"userType\": {\r\n        \"id\": 1,\r\n        \"title\": \"Admin\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register new User SUCCSESS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3psaS5leGFtcGxlLmNvbS8iLCJ1cG4iOiJndW50aGVyLnBldGVyQG1haWwuY2giLCJncm91cHMiOlsiVXNlciJdLCJ1c2VySUQiOjMsImlhdCI6MTcwMDU2MDg2NSwiZXhwIjoxNzAwNjQ3MjY1LCJqdGkiOiIzMTRiODFiZC1hNjRiLTRmZmYtOTMyYy1hMzVkYTdkMTUzNjMifQ.HcUlRhPhubU6mp4fcDMsFAprPZc5M01IadxdZqk7ZKbuqrKYuART1ac3BHZ5qgQZ0wyRpltjQ_bi3GqLolKu08mzTDTWgcYMA3d24_PkaCoghoD1rniHoyymMqRZ7JU_WFIKgbxcJihui51iiN9_fW6zHqRQRkn_p1BUzxn-j02RtNXgJhOauXgsyOAyCpnB5muP0C6ZQQl8oucRPVJ9Hnl6hefyzUPO07RDpDKwt6RFCtzLJOGarh0SknTsTctVamuCNLJHOBfFzDXALGKfxzW8ezaiiZphIWQz2r-kGqHsOZOicgwvPAj3JfWiQ6u2UBJfyjZJYwtTVXk9WkWKEQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"surname\": \"Gunther\",\r\n    \"firstname\": \"Peter\",\r\n    \"email\": \"gunther.peter@mail.ch\",\r\n    \"password\": \"asdf\",\r\n    \"userType\": {\r\n        \"id\": 2,\r\n        \"title\": \"User\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/signin",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"signin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login as registered User SUCCSESS",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3psaS5leGFtcGxlLmNvbS8iLCJ1cG4iOiJndW50aGVyLnBldGVyQG1haWwuY2giLCJncm91cHMiOlsiVXNlciJdLCJ1c2VySUQiOjMsImlhdCI6MTcwMDU2MDg2NSwiZXhwIjoxNzAwNjQ3MjY1LCJqdGkiOiIzMTRiODFiZC1hNjRiLTRmZmYtOTMyYy1hMzVkYTdkMTUzNjMifQ.HcUlRhPhubU6mp4fcDMsFAprPZc5M01IadxdZqk7ZKbuqrKYuART1ac3BHZ5qgQZ0wyRpltjQ_bi3GqLolKu08mzTDTWgcYMA3d24_PkaCoghoD1rniHoyymMqRZ7JU_WFIKgbxcJihui51iiN9_fW6zHqRQRkn_p1BUzxn-j02RtNXgJhOauXgsyOAyCpnB5muP0C6ZQQl8oucRPVJ9Hnl6hefyzUPO07RDpDKwt6RFCtzLJOGarh0SknTsTctVamuCNLJHOBfFzDXALGKfxzW8ezaiiZphIWQz2r-kGqHsOZOicgwvPAj3JfWiQ6u2UBJfyjZJYwtTVXk9WkWKEQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"ladmin.admin@coworkingspace.ch\",\r\n    \"password\": \"asdf\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/session",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"session"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verwaltung der eigenen Buchungen als Mitglied",
+			"item": [
+				{
+					"name": "Get all Bookings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/bookings",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\"id\": 1},\r\n    \"startDate\": \"2023-11-21T10:15:02.832981\",\r\n    \"endDate\": \"2023-11-21T18:15:02.833017\",\r\n    \"space\": {\"id\": 1},\r\n    \"price\": 150.0,\r\n    \"state\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bookings",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Booking",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/bookings/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bookings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit booking",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\"id\": 1},\r\n    \"startDate\": \"2023-11-21T10:15:02.832981\",\r\n    \"endDate\": \"2023-11-21T18:15:02.833017\",\r\n    \"space\": {\"id\": 1},\r\n    \"price\": 150.0,\r\n    \"state\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bookings/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bookings",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verwaltung der Buchungen durch Administratoren",
+			"item": [
+				{
+					"name": "Get all Bookings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/bookings",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new booking",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\"id\": 1},\r\n    \"startDate\": \"2023-11-21T10:15:02.832981\",\r\n    \"endDate\": \"2023-11-21T18:15:02.833017\",\r\n    \"space\": {\"id\": 1},\r\n    \"price\": 150.0,\r\n    \"state\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bookings",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Booking",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/bookings/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bookings",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit booking",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"user\": {\"id\": 1},\r\n    \"startDate\": \"2023-11-21T10:15:02.832981\",\r\n    \"endDate\": \"2023-11-21T18:15:02.833017\",\r\n    \"space\": {\"id\": 1},\r\n    \"price\": 150.0,\r\n    \"state\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/bookings/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bookings",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verwaltung von Mitgliedern durch Administratoren",
+			"item": [
+				{
+					"name": "Get all users SUCCSESS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all userTypes SUCCSESS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/userTypes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new UserType SUCCSESS",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Suspended\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/userTypes",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"userTypes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add new User",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"surname\": \"Raasdf\",\r\n    \"firstname\": \"asdf\",\r\n    \"email\": \"asdf.qwer@poiu.ch\",\r\n    \"password\": \"asdf\",\r\n    \"userType\": {\r\n        \"id\": 2,\r\n        \"title\": \"User\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "localhost:8080/users/2",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/users/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Zusätzlichen Anforderungen",
+			"item": [
+				{
+					"name": "Get reserved Spaces SUCCSESS",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/spaces/reservedSpaces",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"spaces",
+								"reservedSpaces"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get archived Bookings",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:8080/bookings/archivedBookings",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"bookings",
+								"archivedBookings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Suspend User",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{bearer}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"surname\": \"Gunther\",\r\n    \"firstname\": \"Peter\",\r\n    \"email\": \"gunther.peter@mail.ch\",\r\n    \"password\": \"asdf\",\r\n    \"userType\": {\r\n        \"id\": 3,\r\n        \"title\": \"Suspended\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/users/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"users",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "bearerToken",
+			"value": "{}"
+		},
+		{
+			"key": "bearer",
+			"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpc3MiOiJodHRwczovL3psaS5leGFtcGxlLmNvbS8iLCJ1cG4iOiJsYWRtaW4uYWRtaW5AY293b3JraW5nc3BhY2UuY2giLCJncm91cHMiOlsiQWRtaW4iXSwidXNlcklEIjozLCJpYXQiOjE3MDA1NzQ4NzgsImV4cCI6MTcwMDY2MTI3OCwianRpIjoiZWFiZTZjMzItZmQzMS00YmVlLTkzZDgtYmJiMjM3MWZjMTc3In0.OYfAoGf92xcxJ8DhNQwt6txaqTceybdeCVsdG2gUb7Op_m69-qzxbrbOqkPV3I2u--3h0JLVbSeqVJUqEkAXtggZLD3m5YLR7ep8En_MeqQb65tsfCcNSXSns6xhFsAO-a-wqD4zXQoy7DtyZH6faxk3T5eE-A2nixqBSji_hnpp0ZRLePRif-awBVeQS2GguTaxuRGrg4eJHLzcsHzRbwxnX2M5mFpjKeRmfS-lYhbKgPaJMyRH-iuCDRedIw180ygymRvsAAC3DM2eHPhrleWAI_yb80JmPK3uNG-Wo1RVPi3Z9MZDruN8g2h-pev6F52FVsQObxYV_2l0FriVdQ"
+		}
+	]
+}
