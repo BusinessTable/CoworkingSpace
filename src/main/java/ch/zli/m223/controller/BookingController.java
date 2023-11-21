@@ -1,9 +1,9 @@
 package ch.zli.m223.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.core.SecurityContext;
@@ -46,7 +46,7 @@ public class BookingController {
     @Operation(summary = "Index all entries.", description = "Returns a list of all entries.")
     public List<Booking> index(@Context SecurityContext ctx) {
         Optional<Long> userID = jwt.claim("userID");
-        return bookingService.findAll().stream().filter(booking -> booking.getUserId().getId() == userID.get())
+        return bookingService.findAll().stream().filter(booking -> booking.getUser().getId() == userID.get())
                 .toList();
     }
 
@@ -70,11 +70,14 @@ public class BookingController {
                 .anyMatch(user -> user.getUserType().getId() == 1);
 
         boolean isBookingOfUser = bookingService.findAll().stream().filter(cBooking -> id == cBooking.getId())
-                .anyMatch(cBooking -> userID.get() == cBooking.getUserId().getId());
+                .anyMatch(cBooking -> userID.get() == cBooking.getUser().getId());
+        
+        boolean isInFunture = bookingService.findAll().stream().filter(cBooking -> id == cBooking.getId())
+                .anyMatch(cBooking -> cBooking.getStartDate().isAfter(LocalDateTime.now()));
         if (isAdmin) {
             bookingService.deleteBooking(id);
         }
-        if (isBookingOfUser) {
+        if (isBookingOfUser && isInFunture) {
             bookingService.deleteBooking(id);
         }
     }
@@ -91,7 +94,7 @@ public class BookingController {
                 .anyMatch(user -> user.getUserType().getId() == 1);
 
         boolean isBookingOfUser = bookingService.findAll().stream().filter(cBooking -> id == cBooking.getId())
-                .anyMatch(cBooking -> userID.get() == cBooking.getUserId().getId());
+                .anyMatch(cBooking -> userID.get() == cBooking.getUser().getId());
 
         if (isAdmin) {
             return bookingService.updateBooking(id, booking);
