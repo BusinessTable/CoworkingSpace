@@ -14,6 +14,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
@@ -27,6 +28,9 @@ public class UserTypeController {
     
     @Inject
     UserTypeService userTypeService;
+
+    @Inject
+    JsonWebToken jwt;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -67,5 +71,6 @@ public class UserTypeController {
     )
     public UserType update(@PathParam("id") Long id, UserType userType) {
         return userTypeService.updateUserType(id, userType);
+        
     }
 }
