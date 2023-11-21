@@ -2,8 +2,6 @@ package ch.zli.m223.controller;
 
 import java.util.List;
 
-import javax.annotation.security.DenyAll;
-import javax.annotation.security.PermitAll;
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
