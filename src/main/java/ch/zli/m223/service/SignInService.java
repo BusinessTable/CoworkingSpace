@@ -1,11 +1,12 @@
 package ch.zli.m223.service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Optional;
 
-import javax.annotation.security.PermitAll;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.core.NewCookie;
@@ -29,11 +30,23 @@ public class SignInService {
         try {
             if (principal == null || !principal.isPresent()) {
 
+                // Create user, if no user exsists create admin
                 ApplicationUser createdUser = userService.createUser(user);
                 if (countOfUsers == 0) {
                     createdUser.setUserType(userTypeService.findAll().get(0));
                     userService.updateUser(createdUser.getId(), createdUser);
                 }
+
+                // Hash password
+                final MessageDigest digest = MessageDigest.getInstance("SHA3-256");
+                final byte[] hashbytes = digest.digest(
+                        createdUser.getPassword().getBytes(StandardCharsets.UTF_8));
+                StringBuilder result = new StringBuilder();
+                for (byte aByte : hashbytes) {
+                    result.append(String.format("%02x", aByte));
+                }
+
+                createdUser.setPassword(result.toString());
 
                 String token = Jwt
                         .issuer("https://zli.example.com/")
