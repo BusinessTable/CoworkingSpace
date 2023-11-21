@@ -16,7 +16,8 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @NamedQueries({
@@ -29,14 +30,15 @@ public class ApplicationUser {
     @Schema(readOnly = true)
     private Long id;
 
+    @JsonBackReference(value="userType")
     @ManyToOne(optional = false)
-    @Fetch(FetchMode.JOIN)
+    @Fetch(FetchMode.JOIN)    
     private UserType userType;
 
+    @JsonManagedReference(value="user")
     @OneToMany(mappedBy = "user")
-    @JsonIgnoreProperties("user")
     @Fetch(FetchMode.JOIN)
-    private Set<Booking> booking;
+    private Set<Booking> bookings;
 
     @Column(nullable = false)
     private String surname;
@@ -59,11 +61,11 @@ public class ApplicationUser {
     }
 
     public Set<Booking> getBookings() {
-        return booking;
+        return bookings;
     }
 
     public void setBookings(Set<Booking> booking) {
-        this.booking = booking;
+        this.bookings = booking;
     }
 
     public UserType getUserType() {

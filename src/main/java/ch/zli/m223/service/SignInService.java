@@ -34,7 +34,6 @@ public class SignInService {
                 ApplicationUser createdUser = userService.createUser(user);
                 if (countOfUsers == 0) {
                     createdUser.setUserType(userTypeService.findAll().get(0));
-                    userService.updateUser(createdUser.getId(), createdUser);
                 }
 
                 // Hash password
@@ -47,12 +46,13 @@ public class SignInService {
                 }
 
                 createdUser.setPassword(result.toString());
+                userService.updateUser(createdUser.getId(), createdUser);
 
                 String token = Jwt
                         .issuer("https://zli.example.com/")
                         .upn(createdUser.getEmail())
                         .groups(new HashSet<>(Arrays.asList(createdUser.getUserType().getTitle())))
-                        .expiresIn(Duration.ofHours(24))
+                        .expiresIn(Duration.ofDays(1))
                         .claim("userID", createdUser.getId())
                         .sign();
 

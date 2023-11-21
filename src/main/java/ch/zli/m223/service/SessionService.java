@@ -1,5 +1,7 @@
 package ch.zli.m223.service;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -22,14 +24,28 @@ public class SessionService {
 
   public Response authenticate(Credential credential) {
     Optional<ApplicationUser> principal = userService.findByEmail(credential.getEmail());
+    StringBuilder result = new StringBuilder();
 
     try {
-      if (principal.isPresent() && principal.get().getPassword().equals(credential.getPassword())) {
+      // Hash password
+      final MessageDigest digest = MessageDigest.getInstance("SHA3-256");
+      final byte[] hashbytes = digest.digest(
+          credential.getPassword().getBytes(StandardCharsets.UTF_8));
+      for (byte aByte : hashbytes) {
+        result.append(String.format("%02x", aByte));
+      }
+    } catch (Exception e) {
+      System.err.println("Couldn't hash password.");
+    }
+
+    try {
+      if (principal.isPresent() && principal.get().getPassword().equals(result.toString())) {
         String token = Jwt
             .issuer("https://zli.example.com/")
             .upn(credential.getEmail())
             .groups(new HashSet<>(Arrays.asList(principal.get().getUserType().getTitle())))
-            .expiresIn(Duration.ofHours(12))
+            .expiresIn(Duration.ofDays(720))
+            .claim("userID", principal.get().getId())
             .sign();
         return Response
             .ok(principal.get())

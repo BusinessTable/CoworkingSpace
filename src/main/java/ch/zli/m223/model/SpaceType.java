@@ -13,7 +13,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 public class SpaceType {
@@ -23,8 +23,8 @@ public class SpaceType {
     @Schema(readOnly = true)
     private Long id;
 
+    @JsonManagedReference(value = "spaceType")
     @OneToMany(mappedBy = "spaceType")
-    @JsonIgnoreProperties("spaceType")
     @Fetch(FetchMode.JOIN)
     private Set<Space> spaces;
 

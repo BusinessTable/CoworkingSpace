@@ -1,5 +1,6 @@
 package ch.zli.m223.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.annotation.security.RolesAllowed;
@@ -33,6 +34,24 @@ public class SpaceController {
     @Operation(summary = "Index all categories.", description = "Returns a list of all categories.")
     public List<Space> index() {
         return spaceService.findAll();
+    }
+
+    @RolesAllowed({ "ApplicationUser", "Admin" })
+    @GET
+    @Path("/reservedSpaces")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Index all categories.", description = "Returns a list of all categories.")
+    public Float getReservedSpaces() {
+        List<Space> spaces = spaceService.findAll();
+        int spaceCount = spaces.size();
+        int[] bookedSpaceCount = { 0 };
+        spaces.stream().forEach(space -> {
+            if (space.getBookingId().stream().filter(booking -> booking.getStartDate().isBefore(LocalDateTime.now()))
+                    .filter(booking -> booking.getEndDate().isAfter(LocalDateTime.now())).count() > 0) {
+                bookedSpaceCount[0]++;
+            }
+        });
+        return Float.valueOf((bookedSpaceCount[0] / spaceCount) * 100);
     }
 
     @RolesAllowed({ "Admin" })

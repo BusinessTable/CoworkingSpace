@@ -19,12 +19,12 @@ import ch.zli.m223.service.SignInService;
 @PermitAll
 public class SignInController {
     @Inject
-    SignInService sessionService;
+    SignInService signInService;
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(summary = "Register a user.", description = "Returns a token upon successful authentication.")
     public Response create(ApplicationUser applicationUser) {
-        return this.sessionService.authenticate(applicationUser);
+        return this.signInService.authenticate(applicationUser);
     }
 }

@@ -14,7 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.media.Schema;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 public class Space {
@@ -24,12 +24,12 @@ public class Space {
     @Schema(readOnly = true)
     private Long id;
 
+    @JsonBackReference(value = "spaceType")
     @ManyToOne(optional = false)
     @Fetch(FetchMode.JOIN)
     private SpaceType spaceType;
 
     @OneToMany(mappedBy = "space")
-    @JsonIgnoreProperties("space")
     @Fetch(FetchMode.JOIN)
     private Set<Booking> booking;
 

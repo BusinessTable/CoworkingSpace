@@ -35,6 +35,9 @@ public class UserController {
         description = "Returns a list of all categories."
     )
     public List<ApplicationUser> index() {
+
+        System.out.println();
+
         return userService.findAll();
     }
 

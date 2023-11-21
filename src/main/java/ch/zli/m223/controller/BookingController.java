@@ -3,6 +3,8 @@ package ch.zli.m223.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.annotation.security.RolesAllowed;
 import javax.inject.Inject;
@@ -22,6 +24,7 @@ import javax.ws.rs.core.MediaType;
 import org.eclipse.microprofile.jwt.JsonWebToken;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
+import org.hibernate.mapping.Collection;
 
 import ch.zli.m223.model.Booking;
 import ch.zli.m223.service.BookingService;
@@ -46,8 +49,40 @@ public class BookingController {
     @Operation(summary = "Index all entries.", description = "Returns a list of all entries.")
     public List<Booking> index(@Context SecurityContext ctx) {
         Optional<Long> userID = jwt.claim("userID");
-        return bookingService.findAll().stream().filter(booking -> booking.getUser().getId() == userID.get())
-                .toList();
+
+        boolean isAdmin = userService.findAll().stream().filter(user -> user.getId() == userID.get())
+                .anyMatch(user -> user.getUserType().getId() == 1);
+
+        if (isAdmin) {
+            return bookingService.findAll();
+        }
+
+        return bookingService.findAll().stream()
+                .filter(booking -> booking.getUser().getId() == userID.get())
+                .filter(booking -> booking.getEndDate().isAfter(booking.getStartDate()))
+                .collect(Collectors.toList());
+    }
+
+    @RolesAllowed({ "ApplicationUser", "Admin" })
+    @GET
+    @Path("/archivedBookings")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(summary = "returns all bookings from the past.", description = "returns all bookings from the past.")
+    public List<Booking> getArchivedBookings(@Context SecurityContext ctx) {
+        Optional<Long> userID = jwt.claim("userID");
+
+        boolean isAdmin = userService.findAll().stream().filter(user -> user.getId() == userID.get())
+                .anyMatch(user -> user.getUserType().getId() == 1);
+
+        if (isAdmin) {
+            return bookingService.findAll().stream()
+                .filter(booking -> booking.getEndDate().isAfter(booking.getStartDate())).collect(Collectors.toList());
+        }
+
+        return bookingService.findAll().stream()
+                .filter(booking -> booking.getUser().getId() == userID.get())
+                .filter(booking -> booking.getEndDate().isBefore(LocalDateTime.now()))
+                .collect(Collectors.toList());
     }
 
     @RolesAllowed({ "ApplicationUser", "Admin" })
@@ -71,7 +106,7 @@ public class BookingController {
 
         boolean isBookingOfUser = bookingService.findAll().stream().filter(cBooking -> id == cBooking.getId())
                 .anyMatch(cBooking -> userID.get() == cBooking.getUser().getId());
-        
+
         boolean isInFunture = bookingService.findAll().stream().filter(cBooking -> id == cBooking.getId())
                 .anyMatch(cBooking -> cBooking.getStartDate().isAfter(LocalDateTime.now()));
         if (isAdmin) {
