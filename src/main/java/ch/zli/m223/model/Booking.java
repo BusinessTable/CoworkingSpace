@@ -39,10 +39,13 @@ public class Booking {
     @Column(nullable = false)
     private Float price;
 
+    @Column(nullable = true)
+    private Boolean state;
+
     @Schema(hidden = true)
     @AssertTrue(message = "Check out should be after check in.")
     private boolean isCheckOutAfterCheckIn() {
-        return this.startDate.isAfter(this.endDate);
+        return this.endDate.isAfter(this.startDate);
     }
 
     public Long getId() {
@@ -51,22 +54,6 @@ public class Booking {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ApplicationUser getUserId() {
-        return user;
-    }
-
-    public void setUserId(ApplicationUser user) {
-        this.user = user;
-    }
-
-    public Space getSpaceId() {
-        return space;
-    }
-
-    public void setSpaceId(Space space) {
-        this.space = space;
     }
 
     public LocalDateTime getStartDate() {
@@ -91,5 +78,29 @@ public class Booking {
 
     public void setPrice(Float price) {
         this.price = price;
+    }
+
+    public ApplicationUser getUser() {
+        return user;
+    }
+
+    public void setUser(ApplicationUser user) {
+        this.user = user;
+    }
+
+    public Space getSpace() {
+        return space;
+    }
+
+    public void setSpace(Space space) {
+        this.space = space;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 }
